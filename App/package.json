@@ -1,5 +1,5 @@
 {
-  "name": "memory-game",
+  "name": "app",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -9,6 +9,6 @@
     "preview": "vite preview"
   },
   "devDependencies": {
-    "vite": "^7.1.7"
+    "vite": "^7.2.2"
   }
 }
