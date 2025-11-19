@@ -15,10 +15,16 @@ document.querySelector('#app').innerHTML = `
     <div class="card">
       <button id="counter" type="button"></button>
     </div>
+
+    <div class="Versions">
+      <button>Version 1</button>
+      <button>Version 1</button>
+      <button>Version 1</button>
+    </div>
+
     <p class="read-the-docs">
       Click on the Vite logo to learn more
     </p>
   </div>
 `
 
-setupCounter(document.querySelector('#counter'))
