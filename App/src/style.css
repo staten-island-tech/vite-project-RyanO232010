@@ -4,8 +4,8 @@
   font-weight: 400;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color: rgba(0, 0, 0, 0.87);
+  background-color: transparent;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -13,11 +13,65 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+path {
+  transform-origin: 50% 0%;
+}
+
+.background--custom {
+  background-color: wheat;
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  top: 0;
+  left: 0;
+}
+
+.animated-path0 {
+  animation: path0 4s infinite alternate;
+}
+
+.animated-path1 {
+  animation: path1 6s infinite alternate;
+}
+
+.animated-path2 {
+  animation: path2 5s infinite alternate;
+}
+
+@keyframes path0 {
+  0% {
+    transform: rotate(-10deg);
+  }
+  100% {
+    transform: rotate(10deg);
+  }
+}
+
+@keyframes path1 {
+  0% {
+    transform: rotate(-30deg);
+  }
+  100% {
+    transform: rotate(30deg);
+  }
+}
+
+@keyframes path2 {
+  0% {
+    transform: rotate(40deg);
+  }
+  100% {
+    transform: rotate(-40deg);
+  }
+}
+
 a {
   font-weight: 500;
   color: #646cff;
   text-decoration: inherit;
 }
+
 a:hover {
   color: #535bf2;
 }
@@ -28,6 +82,7 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  background-color: transparent;
 }
 
 h1 {
@@ -40,19 +95,6 @@ h1 {
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
-}
-
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vanilla:hover {
-  filter: drop-shadow(0 0 2em #f7df1eaa);
 }
 
 .card {
@@ -78,9 +120,16 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
 }
+
 button:hover {
-  border-color: #646cff;
+  background: linear-gradient(
+    to right,
+    rgb(0, 0, 0) 0%,
+    rgb(112, 112, 112) 50%,
+    rgb(225, 225, 255) 100%
+  );
 }
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
@@ -89,7 +138,7 @@ button:focus-visible {
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
-    background-color: #ffffff;
+    background-color: transparent;
   }
   a:hover {
     color: #747bff;
