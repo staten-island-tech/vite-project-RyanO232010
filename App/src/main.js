@@ -1,7 +1,16 @@
 import "./style.css";
 import javascriptLogo from "./javascript.svg";
 import viteLogo from "/vite.svg";
-import { setupCounter } from "./counter.js";
+
+
+const cards = [
+  {
+    name: "Dog",
+    img: "/Pictures/Animals/dog.avif", 
+    category: "Animals"
+  },
+];
+
 
 document.querySelector("#app").innerHTML = `
   <div>
@@ -11,14 +20,60 @@ document.querySelector("#app").innerHTML = `
       <h1>Please choose your version!</h1>
     </div>
 
-    <div class="card">
+    <div class="menu">
       <div class="Versions">
-        <button id="v1">Animals</button>
-        <button id="v2">Poker Cards</button>
-        <button id="v3">Flags</button>
+        <button class="filterb" data-category="Animals">Animals</button>
+        <button class="filterb" data-category="Poker Cards">Poker Cards</button>
+        <button class="filterb" data-category="Flags">Flags</button>
       </div>
     </div>
   </div>
 `;
 
 
+function inject(card) {
+  const container = document.querySelector(".container");
+
+  if (!container) {
+    console.error("Container not found in DOM.");
+    return;
+  }
+
+  container.insertAdjacentHTML(
+    "beforeend",
+    `
+      <div class="memory-card" 
+           data-title="${card.name}" 
+           data-category="${card.category}">
+        <h1>${card.name}</h1>
+        <img class="img" src="${card.img}" alt="${card.name}">
+      </div>
+    `
+  );
+}
+
+function filterByCategory(category) {
+  document.querySelectorAll(".memory-card").forEach((card) => {
+    const cardCat = card.dataset.category;
+
+    if (category === "All" || category === cardCat) {
+      card.style.display = "";
+    } else {
+      card.style.display = "none";
+    }
+  });
+}
+
+
+function filterButtons() {
+  document.querySelectorAll(".filterb").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const category = btn.dataset.category;
+      filterByCategory(category);
+    });
+  });
+}
+
+cards.forEach(inject);
+filterButtons();
+filterByCategory("All");
