@@ -2,15 +2,10 @@ import "./style.css";
 import javascriptLogo from "./javascript.svg";
 import viteLogo from "/vite.svg";
 
-
 const cards = [
-  {
-    name: "Dog",
-    img: "/Pictures/Animals/dog.avif", 
-    category: "Animals"
-  },
+  { name: "Dog", img: "/Animals/dog.avif", category: "Animals" },
+  { name: "Dog", img: "/Animals/dogg.avif", category: "Animals" },
 ];
-
 
 document.querySelector("#app").innerHTML = `
   <div>
@@ -22,14 +17,13 @@ document.querySelector("#app").innerHTML = `
 
     <div class="menu">
       <div class="Versions">
-        <button class="filterb" data-category="Animals">Animals</button>
-        <button class="filterb" data-category="Poker Cards">Poker Cards</button>
-        <button class="filterb" data-category="Flags">Flags</button>
+        <button class="filterb" data-category="Flags">Flags ( Easy )</button>
+        <button class="filterb" data-category="Animals">Animals ( Medium )</button>
+        <button class="filterb" data-category="Poker Cards">Poker Cards ( Hard )</button>
       </div>
     </div>
   </div>
 `;
-
 
 function inject(card) {
   const container = document.querySelector(".container");
@@ -44,8 +38,7 @@ function inject(card) {
     `
       <div class="memory-card" 
            data-title="${card.name}" 
-           data-category="${card.category}">
-        <h1>${card.name}</h1>
+           data-category="${card.category}">  
         <img class="img" src="${card.img}" alt="${card.name}">
       </div>
     `
@@ -64,7 +57,6 @@ function filterByCategory(category) {
   });
 }
 
-
 function filterButtons() {
   document.querySelectorAll(".filterb").forEach((btn) => {
     btn.addEventListener("click", () => {
@@ -76,4 +68,4 @@ function filterButtons() {
 
 cards.forEach(inject);
 filterButtons();
-filterByCategory("All");
+filterByCategory("");

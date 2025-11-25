@@ -81,6 +81,14 @@ path {
   box-sizing: border-box;
 }
 
+.img {
+  width: 100%;
+  max-width: 250px;
+  height: 350px;
+  object-fit: cover;
+  margin-bottom: 20px;
+}
+
 .card {
   width: 160px;
   height: 200px;
