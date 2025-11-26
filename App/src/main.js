@@ -1,6 +1,5 @@
 import "./style.css";
-import javascriptLogo from "./javascript.svg";
-import viteLogo from "/vite.svg";
+
 
 const cards = [
   { name: "Dog", img: "/Animals/dog.avif", category: "Animals" },
@@ -10,6 +9,7 @@ const cards = [
 document.querySelector("#app").innerHTML = `
   <div>
     <div>
+      <div class="l/dmode"><button>Dark Mode/Light Mode</button></div>
       <h1>Hello!</h1>
       <h1>Welcome to the Memory Game!</h1>
       <h1>Please choose your version!</h1>

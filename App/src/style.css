@@ -1,3 +1,12 @@
+html,
+body,
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-size: 15px;
+}
+
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -25,13 +34,34 @@ path {
 }
 
 .background--custom {
-  background-color: wheat;
-  position: absolute;
-  width: 100vw;
-  height: 100vh;
+  position: fixed;
+  inset: 0;
   z-index: -1;
-  top: 0;
-  left: 0;
+  background-color: wheat;
+}
+
+.bg-svg {
+  width: 100%;
+  height: 100%;
+}
+
+path {
+  fill: none;
+  stroke-width: 2;
+  transform-origin: 50% 0%;
+}
+
+.animated-path0 {
+  stroke: #646cff;
+  animation: path0 4s infinite alternate;
+}
+.animated-path1 {
+  stroke: #f7df1e;
+  animation: path1 6s infinite alternate;
+}
+.animated-path2 {
+  stroke: #ff6464;
+  animation: path2 5s infinite alternate;
 }
 
 .animated-path0 {
@@ -47,18 +77,30 @@ path {
 }
 
 @keyframes path0 {
-  0% { transform: rotate(-10deg); }
-  100% { transform: rotate(10deg); }
+  0% {
+    transform: rotate(-10deg);
+  }
+  100% {
+    transform: rotate(10deg);
+  }
 }
 
 @keyframes path1 {
-  0% { transform: rotate(-30deg); }
-  100% { transform: rotate(30deg); }
+  0% {
+    transform: rotate(-30deg);
+  }
+  100% {
+    transform: rotate(30deg);
+  }
 }
 
 @keyframes path2 {
-  0% { transform: rotate(40deg); }
-  100% { transform: rotate(-40deg); }
+  0% {
+    transform: rotate(40deg);
+  }
+  100% {
+    transform: rotate(-40deg);
+  }
 }
 
 #app {
@@ -95,7 +137,7 @@ path {
   background: white;
   border-radius: 12px;
   padding: 1em;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -148,3 +190,4 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
