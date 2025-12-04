@@ -118,18 +118,26 @@ function inject(card) {
   container.insertAdjacentHTML(
     "beforeend",
     `
-      <div class="memory-card ${categoryClass}" 
-           data-title="${card.name}" 
-           data-category="${card.category}">
-        
-        <img class="${categoryClass}" 
-             src="${card.img}" 
-             alt="${card.name}">
+    <div class="flip-card memory-card ${categoryClass}" 
+         data-title="${card.name}" 
+         data-category="${card.category}">
+
+      <div class="flip-card-inner">
+
+        <div class="flip-card-back">
+          <img src="${card.img}" alt="${card.name}" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+
+        <div class="flip-card-front">
+          <img src="https://i.pinimg.com/236x/30/37/56/3037565bfff30ab14386e78ee9140979.jpg" class="poker">
+        </div>
+
       </div>
+
+    </div>
     `
   );
 }
-
 
 function injectAll(cards) {
   const container = document.querySelector(".container");
@@ -167,7 +175,7 @@ function filterButtons() {
 }
 
 function ld() {
-  document.querySelector(".l/dmode")
+  document.querySelector(".l/dmode");
 }
 
 injectAll(cards);
