@@ -115,22 +115,21 @@ function inject(card) {
 
   const categoryClass = card.category.toLowerCase();
 
-  for (let i = 0; i < 2; i++) {
-    container.insertAdjacentHTML(
-      "beforeend",
-      `
-        <div class="memory-card ${categoryClass}" 
-             data-title="${card.name}" 
-             data-category="${card.category}">
-          
-          <img class="${categoryClass}" 
-               src="${card.img}" 
-               alt="${card.name}">
-        </div>
-      `
-    );
-  }
+  container.insertAdjacentHTML(
+    "beforeend",
+    `
+      <div class="memory-card ${categoryClass}" 
+           data-title="${card.name}" 
+           data-category="${card.category}">
+        
+        <img class="${categoryClass}" 
+             src="${card.img}" 
+             alt="${card.name}">
+      </div>
+    `
+  );
 }
+
 
 function injectAll(cards) {
   const container = document.querySelector(".container");
@@ -165,6 +164,10 @@ function filterButtons() {
       filterByCategory(category);
     });
   });
+}
+
+function ld() {
+  document.querySelector(".l/dmode")
 }
 
 injectAll(cards);
