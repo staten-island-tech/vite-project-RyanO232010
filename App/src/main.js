@@ -129,7 +129,7 @@ function inject(card) {
         </div>
 
         <div class="flip-card-front">
-          <img src="https://i.pinimg.com/236x/30/37/56/3037565bfff30ab14386e78ee9140979.jpg" class="poker">
+          <img src="https://i.pinimg.com/236x/30/37/56/3037565bfff30ab14386e78ee9140979.jpg" class="${card.category}">
         </div>
 
       </div>
@@ -137,6 +137,14 @@ function inject(card) {
     </div>
     `
   );
+}
+
+function enableCardFlip() {
+  document.querySelectorAll(".memory-card").forEach((card) => {
+    card.addEventListener("click", () => {
+      card.classList.toggle("flipped");
+    });
+  });
 }
 
 function injectAll(cards) {
@@ -174,10 +182,49 @@ function filterButtons() {
   });
 }
 
-function ld() {
-  document.querySelector(".l/dmode");
+let clickedCards = [];
+
+function checkPair() {
+  document.querySelectorAll(".memory-card img").forEach((img) => {
+    img.addEventListener("click", (event) => {
+      const card = event.target.closest(".memory-card");
+      const name = card.dataset.title;
+
+      clickedCards.push({ element: card, name });
+
+
+      if (clickedCards.length === 2) {
+        const [first, second] = clickedCards;
+
+        if (first.name === second.name) {
+          console.log("MATCH:", first.name);
+
+        } else {
+          console.log("NO MATCH");
+          setTimeout(() => {
+            first.element.classList.remove("flipped");
+            second.element.classList.remove("flipped");
+          }, 800);
+        }
+        clickedCards = [];
+      }
+    });
+  });
 }
 
+
+function ld() {
+  document.querySelector(".l/dmode").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      console.log("flip")
+    });
+  });
+}
+
+
 injectAll(cards);
+enableCardFlip();
 filterButtons();
 filterByCategory("");
+checkPair();
+ld();

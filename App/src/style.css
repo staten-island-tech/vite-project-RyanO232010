@@ -127,7 +127,8 @@ path {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
-.flip-card:hover .flip-card-inner {
+
+.flip-card.flipped .flip-card-inner {
   transform: rotateY(180deg);
 }
 
@@ -165,25 +166,26 @@ path {
 }
 
 .poker {
-  width: 90%;
+  width: 100%;
   max-width: 150px;
-  height: 170px;
+  height: 180px;
   margin-bottom: 20px;
 }
 
 .animals {
-  width: 90%;
+  width: 100%;
   max-width: 150px;
-  height: 150px;
+  height: 180px;
   margin-bottom: 20px;
 }
 
 .flags {
-  width: 90%;
+  width: 100%;
   max-width: 200px;
-  height: 115px;
+  height: 140px;
   margin-bottom: 20px;
 }
+
 
 .card {
   width: 160px;
