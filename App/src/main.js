@@ -192,13 +192,11 @@ function checkPair() {
 
       clickedCards.push({ element: card, name });
 
-
       if (clickedCards.length === 2) {
         const [first, second] = clickedCards;
 
         if (first.name === second.name) {
           console.log("MATCH:", first.name);
-
         } else {
           console.log("NO MATCH");
           setTimeout(() => {
@@ -212,15 +210,13 @@ function checkPair() {
   });
 }
 
-
 function ld() {
-  document.querySelector(".l/dmode").forEach((btn) => {
+  document.querySelectorAll(".ldmode").forEach((btn) => {
     btn.addEventListener("click", () => {
-      console.log("flip")
+      document.body.classList.toggle("dark");
     });
   });
 }
-
 
 injectAll(cards);
 enableCardFlip();

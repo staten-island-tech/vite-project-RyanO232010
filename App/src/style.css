@@ -29,51 +29,29 @@ body {
   background-color: transparent;
 }
 
+h1 {
+  margin: 1rem;
+  font-size: large;
+}
+
+body.dark h1 {
+  margin: 1rem;
+  font-size: large;
+  color: white;
+}
+
 path {
   transform-origin: 50% 0%;
 }
 
 .background--custom {
-  position: fixed;
-  inset: 0;
+  background-color: #f9f8f6;
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
   z-index: -1;
-  background-color: wheat;
-}
-
-.bg-svg {
-  width: 100%;
-  height: 100%;
-}
-
-path {
-  fill: none;
-  stroke-width: 2;
-  transform-origin: 50% 0%;
-}
-
-.animated-path0 {
-  stroke: #646cff;
-  animation: path0 4s infinite alternate;
-}
-.animated-path1 {
-  stroke: #f7df1e;
-  animation: path1 6s infinite alternate;
-}
-.animated-path2 {
-  stroke: #ff6464;
-  animation: path2 5s infinite alternate;
-}
-
-.animated-path0 {
-  animation: path0 4s infinite alternate;
-}
-
-.animated-path1 {
-  animation: path1 6s infinite alternate;
-}
-
-.animated-path2 {
-  animation: path2 5s infinite alternate;
+  top: 0;
+  left: 0;
 }
 
 @keyframes path0 {
@@ -103,6 +81,37 @@ path {
   }
 }
 
+.path0 {
+  animation: path0 5s linear infinite alternate;
+}
+
+.path1 {
+  animation: path1 12.5s linear infinite alternate;
+}
+
+.path2 {
+  animation: path2 30s linear infinite alternate;
+}
+
+body.dark .background--custom {
+  background-color: #555555;
+}
+
+body.dark .background--custom path.path0 {
+  fill: black;
+  fill-opacity: 0.7;
+}
+
+body.dark .background--custom path.path1 {
+  fill: #2e2e2e;
+  fill-opacity: 0.6;
+}
+
+body.dark .background--custom path.path2 {
+  fill: #444444;
+  fill-opacity: 0.3;
+}
+
 #app {
   max-width: 3000px;
   margin: 0 auto;
@@ -126,7 +135,6 @@ path {
   transform-style: preserve-3d;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
-
 
 .flip-card.flipped .flip-card-inner {
   transform: rotateY(180deg);
@@ -186,7 +194,6 @@ path {
   margin-bottom: 20px;
 }
 
-
 .card {
   width: 160px;
   height: 200px;
@@ -204,24 +211,113 @@ path {
   align-content: center;
 }
 
+.btntext {
+  color: white;
+}
+
+body.dark .btntext {
+  color: black;
+}
+
 button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
+  display: inline-block;
+  outline: none;
   cursor: pointer;
-  transition: border-color 0.25s, background 0.25s;
+  font-size: 14px;
+  line-height: 1;
+  border-radius: 500px;
+  transition-property: background-color, border-color, color, box-shadow, filter;
+  transition-duration: 0.3s;
+  border: 1px solid transparent;
+  letter-spacing: 2px;
+  min-width: 160px;
+  text-transform: uppercase;
+  white-space: normal;
+  font-weight: 700;
+  text-align: center;
+  padding: 16px 14px 18px;
+  color: #444444;
+  box-shadow: inset 0 0 0 2px #444444;
+  background: linear-gradient(
+    to left,
+    #ff9a9e 0%,
+    #fcb69f 10%,
+    #f6d365 20%,
+    #ffdd85 30%,
+    #fda085 40%,
+    #f78ca0 50%,
+    #9f7aea 60%,
+    #667eea 70%,
+    #5a3f9e 80%,
+    #2c2c54 90%
+  );
+  height: 48px;
+}
+
+body.dark button {
+  display: inline-block;
+  outline: none;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 1;
+  border-radius: 500px;
+  transition-property: background-color, border-color, color, box-shadow, filter;
+  transition-duration: 10s;
+  border: 1px solid white;
+  letter-spacing: 2px;
+  min-width: 160px;
+  text-transform: uppercase;
+  white-space: normal;
+  font-weight: 700;
+  text-align: center;
+  padding: 16px 14px 18px;
+  color: white;
+  box-shadow: inset 0 0 0 2px black;
+  background: linear-gradient(
+    to right,
+    #ff9a9e 0%,
+    #fcb69f 10%,
+    #f6d365 20%,
+    #ffdd85 30%,
+    #fda085 40%,
+    #f78ca0 50%,
+    #9f7aea 60%,
+    #667eea 70%,
+    #5a3f9e 80%,
+    #2c2c54 90%
+  );
+  height: 48px;
 }
 
 button:hover {
   background: linear-gradient(
     to right,
-    rgb(0, 0, 0) 0%,
-    rgb(112, 112, 112) 50%,
-    rgb(225, 225, 255) 100%
+    #006561 0%,
+    #034960 10%,
+    #09529a 20%,
+    #00227a 30%,
+    #025f7a 40%,
+    #08835f 50%,
+    #60b985 60%,
+    #998115 70%,
+    #a5c063 80%,
+    #d3d3ab 90%
+  );
+}
+
+body.dark button:hover {
+  background: linear-gradient(
+    to left,
+    #006561 0%,
+    #034960 10%,
+    #09529a 20%,
+    #00227a 30%,
+    #025f7a 40%,
+    #08835f 50%,
+    #60b985 60%,
+    #998115 70%,
+    #a5c063 80%,
+    #d3d3ab 90%
   );
 }
 

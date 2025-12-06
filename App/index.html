@@ -2,20 +2,44 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Memory Game</title>
   </head>
   <body>
     <div class="background--custom">
-      <svg class="bg-svg" viewBox="0 0 100 100" preserveAspectRatio="none">
-        <path class="animated-path0" d="M0,50 Q50,0 100,50 T200,50"></path>
-        <path class="animated-path1" d="M0,70 Q50,20 100,70 T200,70"></path>
-        <path class="animated-path2" d="M0,90 Q50,40 100,90 T200,90"></path>
+      <svg
+        class="background--custom"
+        id="demo"
+        viewBox="0 0 100 100"
+        preserveAspectRatio="none"
+      >
+        <path
+          class="path0"
+          fill="#EFE9E3"
+          fill-opacity="0.7"
+          d="M-100 -100L200 -100L200 50L-100 50Z"
+        />
+        <path
+          class="path1"
+          fill="#D9CFC7"
+          fill-opacity="0.7"
+          d="M-100 -100L200 -100L200 50L-100 50Z"
+        />
+        <path
+          class="path2"
+          fill="#C9B59C"
+          fill-opacity="0.2"
+          d="M-100 -100L200 -100L200 20L-100 20Z"
+        />
       </svg>
     </div>
 
     <div id="app">
       <div>
-        <div><button class="l/dmode">Dark Mode/Light Mode</button></div>
+        <div>
+          <button class="ldmode">
+            <p class="btntext">Dark Mode/Light Mode</p>
+          </button>
+        </div>
         <h1>Hello!</h1>
         <h1>Welcome to the Memory Game!</h1>
         <h1>Please choose your version!</h1>
@@ -23,12 +47,14 @@
 
       <div class="menu">
         <div class="Versions">
-          <button class="filterb" data-category="Flags">Flags ( Easy )</button>
+          <button class="filterb" data-category="Flags">
+            <p class="btntext">Flags ( Easy )</p>
+          </button>
           <button class="filterb" data-category="Animals">
-            Animals ( Medium )
+            <p class="btntext">Animals ( Medium )</p>
           </button>
           <button class="filterb" data-category="Poker">
-            Poker Cards ( Hard )
+            <p class="btntext">Poker Cards ( Hard )</p>
           </button>
         </div>
       </div>
