@@ -183,27 +183,35 @@ function filterButtons() {
 }
 
 let clickedCards = [];
+let boardLocked = false;
 
 function checkPair() {
   document.querySelectorAll(".memory-card img").forEach((img) => {
     img.addEventListener("click", (event) => {
+      if (boardLocked) return; 
+
       const card = event.target.closest(".memory-card");
       const name = card.dataset.title;
 
       clickedCards.push({ element: card, name });
 
       if (clickedCards.length === 2) {
+        boardLocked = true; 
+
         const [first, second] = clickedCards;
 
         if (first.name === second.name) {
           console.log("MATCH:", first.name);
+          boardLocked = false; 
         } else {
           console.log("NO MATCH");
           setTimeout(() => {
             first.element.classList.remove("flipped");
             second.element.classList.remove("flipped");
+            boardLocked = false; 
           }, 800);
         }
+
         clickedCards = [];
       }
     });
@@ -217,6 +225,8 @@ function ld() {
     });
   });
 }
+
+
 
 injectAll(cards);
 enableCardFlip();
