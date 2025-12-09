@@ -176,6 +176,9 @@ function filterByCategory(category) {
 function filterButtons() {
   document.querySelectorAll(".filterb").forEach((btn) => {
     btn.addEventListener("click", () => {
+
+      startTimer();
+
       const category = btn.dataset.category;
       filterByCategory(category);
     });
@@ -225,6 +228,43 @@ function ld() {
     });
   });
 }
+
+let startTime = 0;
+let elapsed = 0;
+let interval = null;
+
+function updateTimerDisplay() {
+  const totalSeconds = Math.floor(elapsed / 1000);
+  const minutes = Math.floor(totalSeconds / 60);
+  const seconds = totalSeconds % 60;
+
+  const timerEl = document.getElementById("timerDisplay");
+  if (!timerEl) return;
+
+  timerEl.textContent = `Time: ${minutes}:${seconds.toString().padStart(2, "0")}`;
+}
+
+
+function startTimer() {
+  resetTimer()
+
+  startTime = Date.now();
+
+  interval = setInterval(() => {
+    elapsed = Date.now() - startTime;
+    updateTimerDisplay();
+  }, 200);
+}
+
+
+function resetTimer() {
+  clearInterval(interval);
+  interval = null;
+  elapsed = 0;
+  updateTimerDisplay();
+}
+
+
 
 
 
