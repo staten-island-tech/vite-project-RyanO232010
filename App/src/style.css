@@ -46,13 +46,14 @@ path {
 
 .background--custom {
   background-color: #f9f8f6;
-  position: absolute;
+  position: fixed;
   width: 100vw;
   height: 100vh;
   z-index: -1;
   top: 0;
   left: 0;
 }
+
 
 @keyframes path0 {
   0% {
@@ -173,6 +174,7 @@ body.dark .background--custom path.path2 {
   box-sizing: border-box;
 }
 
+.own,
 .poker {
   width: 100%;
   max-width: 150px;
@@ -219,6 +221,7 @@ body.dark .btntext {
   color: black;
 }
 
+.clear,
 button {
   display: inline-block;
   outline: none;

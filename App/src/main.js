@@ -45,7 +45,6 @@ const cards = [
   { name: "Polar Bear", img: "/Animals/pb.jpg", category: "Animals" },
   { name: "Chimpanzee", img: "/Animals/chimp.jpg", category: "Animals" },
   { name: "Tiger", img: "/Animals/tiger.jpg", category: "Animals" },
-
   { name: "USA Flag", img: "/Flags/usa.png", category: "Flags" },
   { name: "Canada Flag", img: "/Flags/canada.png", category: "Flags" },
   { name: "UK Flag", img: "/Flags/uk.png", category: "Flags" },
@@ -78,7 +77,6 @@ const cards = [
   { name: "Egypt Flag", img: "/Flags/egypt.png", category: "Flags" },
   { name: "Sweden Flag", img: "/Flags/sweden.png", category: "Flags" },
   { name: "Norway Flag", img: "/Flags/norway.png", category: "Flags" },
-
   { name: "Ace of Spades", img: "/Poker/A_spades.png", category: "Poker" },
   { name: "Ace of Hearts", img: "/Poker/A_hearts.png", category: "Poker" },
   { name: "Ace of Diamonds", img: "/Poker/A_diamonds.png", category: "Poker" },
@@ -105,172 +103,163 @@ const cards = [
   { name: "Ten of Clubs", img: "/Poker/10_clubs.png", category: "Poker" },
 ];
 
+let clickedCards = [];
+let boardLocked = false;
+let customCards = [];
+let startTime = 0;
+let elapsed = 0;
+let interval = null;
+
+const container = document.querySelector(".container");
+const uploadForm = document.getElementById("uploadForm");
+const uploadName = document.getElementById("uploadName");
+const uploadUrl = document.getElementById("uploadImg");
+const clearBtn = document.querySelector(".clear");
+
 function inject(card) {
-  const container = document.querySelector(".container");
-
-  if (!container) {
-    console.error("Container not found in DOM.");
-    return;
-  }
-
   const categoryClass = card.category.toLowerCase();
-
   container.insertAdjacentHTML(
     "beforeend",
-    `
-    <div class="flip-card memory-card ${categoryClass}" 
-         data-title="${card.name}" 
-         data-category="${card.category}">
-
+    `<div class="flip-card memory-card ${categoryClass}" data-title="${card.name}" data-category="${card.category}">
       <div class="flip-card-inner">
-
         <div class="flip-card-back">
           <img src="${card.img}" alt="${card.name}" style="width:100%; height:100%; object-fit:cover;">
         </div>
-
         <div class="flip-card-front">
           <img src="https://i.pinimg.com/236x/30/37/56/3037565bfff30ab14386e78ee9140979.jpg" class="${card.category}">
         </div>
-
       </div>
-
-    </div>
-    `
+    </div>`
   );
 }
 
-function enableCardFlip() {
-  document.querySelectorAll(".memory-card").forEach((card) => {
-    card.addEventListener("click", () => {
-      card.classList.toggle("flipped");
-    });
-  });
+function injectWithDuplicatesAndShuffle(cardsArray) {
+  const duplicated = [];
+  cardsArray.forEach((card) => duplicated.push(card, card));
+  duplicated.sort(() => Math.random() - 0.5);
+  duplicated.forEach((card) => inject(card));
 }
 
-function injectAll(cards) {
-  const container = document.querySelector(".container");
-  if (!container) return;
+function setupCardClick() {
+  document.querySelectorAll(".memory-card").forEach((card) => {
+    card.onclick = () => {
+      if (boardLocked || clickedCards.includes(card)) return;
+      card.classList.add("flipped");
+      clickedCards.push(card);
 
-  const indexes = [];
-  for (let i = 0; i < cards.length; i++) {
-    indexes.push(i, i);
-  }
+      if (clickedCards.length === 2) {
+        boardLocked = true;
+        const [first, second] = clickedCards;
 
-  indexes.sort(() => Math.random() - 0.5);
+        if (first.dataset.title === second.dataset.title) {
+          clickedCards = [];
+          boardLocked = false;
 
-  indexes.forEach((i) => inject(cards[i], container));
+          const allFlipped = document.querySelectorAll(
+            ".memory-card.flipped"
+          ).length;
+          const totalCards = document.querySelectorAll(".memory-card").length;
+          if (allFlipped === totalCards) {
+            document.getElementById("winMessage").style.display = "block";
+          }
+        } else {
+          setTimeout(() => {
+            first.classList.remove("flipped");
+            second.classList.remove("flipped");
+            clickedCards = [];
+            boardLocked = false;
+          }, 800);
+        }
+      }
+    };
+  });
 }
 
 function filterByCategory(category) {
-  document.querySelectorAll(".memory-card").forEach((card) => {
-    const cardCat = card.dataset.category;
+  container.innerHTML = "";
+  let cardsToInject = [];
+  if (category === "All") cardsToInject = [...cards, ...customCards];
+  else if (category === "own") cardsToInject = customCards;
+  else cardsToInject = cards.filter((c) => c.category === category);
 
-    if (category === "All" || category === cardCat) {
-      card.style.display = "";
-    } else {
-      card.style.display = "none";
-    }
-  });
+  injectWithDuplicatesAndShuffle(cardsToInject);
+  setupCardClick();
 }
 
 function filterButtons() {
   document.querySelectorAll(".filterb").forEach((btn) => {
     btn.addEventListener("click", () => {
-
       startTimer();
-
-      const category = btn.dataset.category;
-      filterByCategory(category);
+      filterByCategory(btn.dataset.category);
     });
   });
 }
-
-let clickedCards = [];
-let boardLocked = false;
-
-function checkPair() {
-  document.querySelectorAll(".memory-card img").forEach((img) => {
-    img.addEventListener("click", (event) => {
-      if (boardLocked) return; 
-
-      const card = event.target.closest(".memory-card");
-      const name = card.dataset.title;
-
-      clickedCards.push({ element: card, name });
-
-      if (clickedCards.length === 2) {
-        boardLocked = true; 
-
-        const [first, second] = clickedCards;
-
-        if (first.name === second.name) {
-          console.log("MATCH:", first.name);
-          boardLocked = false; 
-        } else {
-          console.log("NO MATCH");
-          setTimeout(() => {
-            first.element.classList.remove("flipped");
-            second.element.classList.remove("flipped");
-            boardLocked = false; 
-          }, 800);
-        }
-
-        clickedCards = [];
-      }
-    });
-  });
-}
-
-function ld() {
-  document.querySelectorAll(".ldmode").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      document.body.classList.toggle("dark");
-    });
-  });
-}
-
-let startTime = 0;
-let elapsed = 0;
-let interval = null;
-
-function updateTimerDisplay() {
-  const totalSeconds = Math.floor(elapsed / 1000);
-  const minutes = Math.floor(totalSeconds / 60);
-  const seconds = totalSeconds % 60;
-
-  const timerEl = document.getElementById("timerDisplay");
-  if (!timerEl) return;
-
-  timerEl.textContent = `Time: ${minutes}:${seconds.toString().padStart(2, "0")}`;
-}
-
 
 function startTimer() {
-  resetTimer()
-
+  resetTimer();
   startTime = Date.now();
-
   interval = setInterval(() => {
     elapsed = Date.now() - startTime;
-    updateTimerDisplay();
+    const totalSeconds = Math.floor(elapsed / 1000);
+    const minutes = Math.floor(totalSeconds / 60);
+    const seconds = totalSeconds % 60;
+    const timerEl = document.getElementById("timerDisplay");
+    if (timerEl)
+      timerEl.textContent = `Time Elapsed: ${minutes}:${seconds
+        .toString()
+        .padStart(2, "0")}`;
   }, 200);
 }
-
 
 function resetTimer() {
   clearInterval(interval);
   interval = null;
   elapsed = 0;
-  updateTimerDisplay();
+  const timerEl = document.getElementById("timerDisplay");
+  if (timerEl) timerEl.textContent = "Time Elapsed: 0:00";
 }
 
+function ld() {
+  document
+    .querySelectorAll(".ldmode")
+    .forEach((btn) =>
+      btn.addEventListener("click", () =>
+        document.body.classList.toggle("dark")
+      )
+    );
+}
 
+uploadForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const name = uploadName.value.trim();
+  const url = uploadUrl.value.trim();
+  if (!name || !url)
+    return alert("Please provide a name and a valid image URL.");
+  const newCard = { name, img: url, category: "own" };
+  customCards.push(newCard);
+  saveUploads();
+  filterByCategory("own");
+  uploadForm.reset();
+});
 
+function saveUploads() {
+  localStorage.setItem("customCards", JSON.stringify(customCards));
+}
 
+clearBtn.addEventListener("click", () => {
+  localStorage.removeItem("customCards");
+  customCards = [];
+  container.innerHTML = "";
+  alert("Local storage cleared!");
+});
 
-injectAll(cards);
-enableCardFlip();
-filterButtons();
-filterByCategory("");
-checkPair();
-ld();
+window.addEventListener("DOMContentLoaded", () => {
+  const storedUploads = localStorage.getItem("customCards");
+  if (storedUploads) customCards = JSON.parse(storedUploads);
+
+  setupCardClick();
+  filterButtons();
+  ld();
+});
+
+export { inject };

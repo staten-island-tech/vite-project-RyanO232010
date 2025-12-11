@@ -4,7 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Memory Game</title>
   </head>
-  <body>
+  <body class = "screen">
     <div class="background--custom">
       <svg
         class="background--custom"
@@ -28,11 +28,17 @@
         <h1>Welcome to the Memory Game!</h1>
         <h1>Please choose your version!</h1>
       </div>
-          <form class="filterb" data-category="extra">
-            <p class="btntext">Add Your Own Game</p>
-          </form> 
-
-      <h1 id="timerDisplay">Time Elapsed: 0:00</h1>
+      <div class="screen">
+          <div class="upload__section">
+        <h2>Upload Images for your own game</h2>
+        <form id="uploadForm">
+            <input type="url" id="uploadImg" placeholder="Image URL" required />
+            <input type="text" id="uploadName" placeholder="Name" required />
+            <button type="submit">Upload</button>
+        </form>
+    </div>
+      <button class="clear"> Clear Local Storage </button>
+      <h1 id="timerDisplay">Timer</h1>
 
       <div class="menu">
         <div class="Versions">
@@ -44,6 +50,8 @@
           </button>
           <button class="filterb" data-category="Poker">
             <p class="btntext">Poker Cards ( Hard )</p>
+          <button class="filterb" data-category="Own">
+            <p class="btntext">Your Own Uploads</p>
         </div>
       </div>
 
