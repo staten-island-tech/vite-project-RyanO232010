@@ -260,6 +260,7 @@ window.addEventListener("DOMContentLoaded", () => {
   setupCardClick();
   filterButtons();
   ld();
+  
 });
 
 export { inject };
